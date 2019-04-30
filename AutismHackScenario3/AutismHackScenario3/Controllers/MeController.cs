@@ -27,18 +27,19 @@ namespace AutismHackScenario3.Controllers
             return new GetViewModel() { Hometown = "" };
         }
 
+        [HttpPost]
         [Route("api/GetScore")]
-        public ScoreModelResponse GetScore()
+        public ScoreModelResponse GetScore([FromBody] ScoreInputModel model)
         {
 
-            var result = _helper.InvokeRequestResponseService().Result;
+            var result = _helper.InvokeRequestResponseService(model).Result;
 
             if (result != null)
             {
                 var scoreModel = new ScoreModelResponse()
                 {
-                    MeanScore = result.Results.output1.value.Values[1][7],
-                    ScoreStdDeviation = result.Results.output1.value.Values[1][7]
+                    MeanScore = result.Results?.output1?.value?.Values[0][7],
+                    ScoreStdDeviation = result.Results?.output1?.value?.Values[0][7]
                 };
 
                 return scoreModel;

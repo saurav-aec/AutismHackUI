@@ -17,7 +17,7 @@ namespace AutismHackScenario3.Common
     }
     public class Helper
     {
-        public async Task<Rootobject> InvokeRequestResponseService()
+        public async Task<Rootobject> InvokeRequestResponseService(ScoreInputModel model)
         {
             using (var client = new HttpClient())
             {
@@ -30,7 +30,7 @@ namespace AutismHackScenario3.Common
                             new StringTable()
                             {
                                 ColumnNames = new string[] {"Age", "Domain", "SkillTitle", "DomainOrdinal", "SkillOrdinal", "SkillLevel", "DaysToMastery"},
-                                Values = new string[,] {  { "0", "value", "value", "0", "0", "0", "0"},  { "0", "value", "value", "0", "0", "0", "0" },  }
+                                Values = new string[,] {  { model.Age, model.Domain, model.SkillTitle, model.DomainOrdinal, model.SkillOrdinal, model.SkillLevel, model.DaysToMastery} }
                             }
                         },
                     },

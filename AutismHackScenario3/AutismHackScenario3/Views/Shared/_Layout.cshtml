@@ -42,10 +42,31 @@
     <script type="text/javascript">
         $(function () {
             $('#btn-predict').on('click', function () {
-                $.get('/api/GetScore', function (data) {
-                    $('#Score').empty();
-                    $('#Score').html($('#Score').html() + 'Mean Score: ' + data.meanScore + 'Standard Daviation: ' + data.scoreStdDeviation + '<br />');
-                }, 'json');
+                //$.get('/api/GetScore', function (data) {
+                //    $('#Score').empty();
+                //    $('#Score').html($('#Score').html() + '<p><b>Mean Score: </b>' + data.meanScore + '<p><b>Standard Daviation: </b>' + data.scoreStdDeviation + '<p><br />');
+                //}, 'json');
+
+                var request = new Object();
+                request.Age = $('#Age').val();
+                request.DaysToMastery = $('#DaysToMastery').val();
+                request.SkillOrdinal = $('#SkillOrdinal').val();
+                request.Domain = $('#Domain').val();
+                request.DomainOrdinal = $('#DomainOrdinal').val();
+                request.SkillLevel = $('#SkillLevel').val();
+                request.SkillOrdinal = $('#SkillOrdinal').val();
+                request.SkillTitle = $('#SkillTitle').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: '/api/GetScore',
+                    data: request,
+                    success: function (data) {
+                        $('#Score').html($('#Score').html() + '<p><b>Mean Score: </b>' + data.meanScore + '<p><b>Standard Daviation: </b>' + data.scoreStdDeviation + '<p><br />');
+                    },
+                    dataType: 'json'
+                });
+
             });
         });
 

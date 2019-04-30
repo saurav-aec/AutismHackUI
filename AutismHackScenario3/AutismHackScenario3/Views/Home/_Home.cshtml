@@ -2,20 +2,24 @@
 @using AutismHackScenario3.Models
 
 <div class="row">
-    <div class="col-md-6">
-        <h2>Score Predictor</h2>
+    <div class="col-md-8">
+        <h2>How many sessions are needed to master a skill ?</h2>
         @model ScoreInputModel
         Age <p>@Html.TextBoxFor(m => m.Age, new { @class = "form-control" })</p>
         Days to Mastery <p>@Html.TextBoxFor(m => m.DaysToMastery, new { @class = "form-control" })</p>
+        Domain <p>@Html.TextBoxFor(m => m.Domain, new { @class = "form-control" })</p>
+        Domain Ordinal<p>@Html.TextBoxFor(m => m.DomainOrdinal, new { @class = "form-control" })</p>
         Skill Level <p>@Html.TextBoxFor(m => m.SkillLevel, new { @class = "form-control" })</p>
         Skill Ordinal <p>@Html.TextBoxFor(m => m.SkillOrdinal, new { @class = "form-control" })</p>
-        Domain <p>@Html.TextBoxFor(m => m.Domain, new { @class = "form-control" })</p>
-        Guardian Count <p>@Html.TextBoxFor(m => m.GuardianCount, new { @class = "form-control" })</p>
+        Skill Title <p>@Html.TextBoxFor(m => m.SkillTitle, new { @class = "form-control" })</p>
+        @*Guardian Count <p>@Html.TextBoxFor(m => m.GuardianCount, new { @class = "form-control" })</p>*@
         <input type="button" value="Predict" id="btn-predict" class="btn btn-primary" />
 
     </div>
-    <div class="col-md-6" id="Score">
-        <h2></h2>
+    <div class="col-md-4" id="Score">
+        <div style="padding:100px 0 0 0">
+            <h2>Results</h2>
+        </div>
     </div>
 
 

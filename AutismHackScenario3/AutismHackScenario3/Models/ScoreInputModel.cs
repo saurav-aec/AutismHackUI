@@ -16,11 +16,17 @@ namespace AutismHackScenario3.Models
         [Display(Name = "DaysToMastery")]
         public string DaysToMastery { get; set; }
 
+        [Display(Name = "Domain")]
+        public string Domain { get; set; }
+
+        [Display(Name = "SkillTitle")]
+        public string SkillTitle { get; set; }
+
         [Display(Name = "SkillLevel")]
         public string SkillLevel { get; set; }
 
         [Display(Name = "DomainOrdinal")]
-        public string Domain { get; set; }
+        public string DomainOrdinal { get; set; }
 
         [Display(Name = "SkillOrdinal")]
         public string SkillOrdinal { get; set; }
