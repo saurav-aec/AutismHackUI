@@ -42,11 +42,6 @@
     <script type="text/javascript">
         $(function () {
             $('#btn-predict').on('click', function () {
-                //$.get('/api/GetScore', function (data) {
-                //    $('#Score').empty();
-                //    $('#Score').html($('#Score').html() + '<p><b>Mean Score: </b>' + data.meanScore + '<p><b>Standard Daviation: </b>' + data.scoreStdDeviation + '<p><br />');
-                //}, 'json');
-
                 var request = new Object();
                 request.Age = $('#Age').val();
                 request.DaysToMastery = $('#DaysToMastery').val();
@@ -62,7 +57,8 @@
                     url: '/api/GetScore',
                     data: request,
                     success: function (data) {
-                        $('#Score').html($('#Score').html() + '<p><b>Mean Score: </b>' + data.meanScore + '<p><b>Standard Daviation: </b>' + data.scoreStdDeviation + '<p><br />');
+                        $('#Score').empty();
+                        $('#Score').html(' <div style="padding:100px 0 0 0"><h2>Results</h2><p><b>Session Count: </b>' + data.meanScore + '<p><b>Standard Daviation: </b>' + data.scoreStdDeviation + '<p><br /></div>');
                     },
                     dataType: 'json'
                 });

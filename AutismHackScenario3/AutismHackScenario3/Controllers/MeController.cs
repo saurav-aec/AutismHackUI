@@ -39,7 +39,7 @@ namespace AutismHackScenario3.Controllers
                 var scoreModel = new ScoreModelResponse()
                 {
                     MeanScore = result.Results?.output1?.value?.Values[0][7],
-                    ScoreStdDeviation = result.Results?.output1?.value?.Values[0][7]
+                    ScoreStdDeviation = result.Results?.output1?.value?.Values[0][8]
                 };
 
                 return scoreModel;
