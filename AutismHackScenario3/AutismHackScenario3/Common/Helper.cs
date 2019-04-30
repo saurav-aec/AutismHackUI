@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutismHackScenario3.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -15,7 +17,7 @@ namespace AutismHackScenario3.Common
     }
     public class Helper
     {
-        public async Task InvokeRequestResponseService()
+        public async Task<Rootobject> InvokeRequestResponseService()
         {
             using (var client = new HttpClient())
             {
@@ -41,30 +43,20 @@ namespace AutismHackScenario3.Common
 
                 client.BaseAddress = new Uri("https://ussouthcentral.services.azureml.net/workspaces/6a52fb6be2244c358ce891ad4dfc2773/services/c44488bcf108433ab77e4f74df9f235d/execute?api-version=2.0&details=true");
 
-                // WARNING: The 'await' statement below can result in a deadlock if you are calling this code from the UI thread of an ASP.Net application.
-                // One way to address this would be to call ConfigureAwait(false) so that the execution does not attempt to resume on the original context.
-                // For instance, replace code such as:
-                //      result = await DoSomeTask()
-                // with the following:
-                //      result = await DoSomeTask().ConfigureAwait(false)
 
-
-                HttpResponseMessage response = await client.PostAsJsonAsync("", scoreRequest);
+                HttpResponseMessage response = await client.PostAsJsonAsync("", scoreRequest).ConfigureAwait(false);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    string result = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("Result: {0}", result);
+                    var responseStr =  response.Content.ReadAsStringAsync().Result;
+                    var returnValue = JsonConvert.DeserializeObject<Rootobject>(responseStr);
+                    return returnValue;
                 }
                 else
                 {
-                    Console.WriteLine(string.Format("The request failed with status code: {0}", response.StatusCode));
+                   var result =  response.Content.ReadAsStringAsync().Result;
 
-                    // Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
-                    Console.WriteLine(response.Headers.ToString());
-
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(responseContent);
+                    return new Rootobject();
                 }
             }
         }

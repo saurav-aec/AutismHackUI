@@ -15,7 +15,7 @@ namespace AutismHackScenario3.Controllers
 
     public class MeController : ApiController
     {
-        Helper _helper = new Helper();  
+        Helper _helper = new Helper();
 
         public MeController()
         {
@@ -28,13 +28,25 @@ namespace AutismHackScenario3.Controllers
         }
 
         [Route("api/GetScore")]
-        public GetViewModel GetScore()
+        public ScoreModelResponse GetScore()
         {
 
-            _helper.InvokeRequestResponseService().Wait();
-            return new GetViewModel() { Hometown = "" };
-        }
+            var result = _helper.InvokeRequestResponseService().Result;
 
+            if (result != null)
+            {
+                var scoreModel = new ScoreModelResponse()
+                {
+                    MeanScore = result.Results.output1.value.Values[1][7],
+                    ScoreStdDeviation = result.Results.output1.value.Values[1][7]
+                };
+
+                return scoreModel;
+            }
+
+            return null;
+
+        }
 
     }
 }

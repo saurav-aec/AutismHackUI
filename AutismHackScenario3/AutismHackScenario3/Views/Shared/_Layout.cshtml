@@ -22,7 +22,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
+                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
                 </ul>
             </div>
         </div>
@@ -39,5 +39,16 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("Scripts", required: false)
+    <script type="text/javascript">
+        $(function () {
+            $('#btn-predict').on('click', function () {
+                $.get('/api/GetScore', function (data) {
+                    $('#Score').empty();
+                    $('#Score').html($('#Score').html() + 'Mean Score: ' + data.meanScore + 'Standard Daviation: ' + data.scoreStdDeviation + '<br />');
+                }, 'json');
+            });
+        });
+
+    </script>
 </body>
 </html>
